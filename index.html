@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>София Мяттонен - Портфолио</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #2a9d8f;
+            --light: #f8f9fa;
+            --dark: #1d3557;
+            --accent: #ff9a00;
+            --snow: #f1faee;
+            --bg-light: #f0f8ff;
+            --text-light: #333;
+            --bg-dark: #0f172a;
+            --text-dark: #f1f5f9;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 10px;
+            --holly-green: #2e7d32;
+            --holly-red: #d32f2f;
+            --gold: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: var(--transition);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body.dark-theme {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        /* Снежинки */
+        .snowflake {
+            position: fixed;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.8;
+        }
+
+        /* Новогодние украшения */
+        .holly-leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--holly-green);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            z-index: -1;
+        }
+
+        .holly-berry {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--holly-red);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* Шапка сайта */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow);
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        .logo p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Навигация */
+        nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Кнопка смены темы */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(30deg);
+        }
+
+        /* Основное содержимое */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Герой-секция с фото */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(to right, rgba(230, 57, 70, 0.1), rgba(42, 157, 143, 0.1));
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px var(--shadow);
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero-img {
+            flex: 0 0 300px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 5px solid var(--gold);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-img img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Секции портфолио */
+        .section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--secondary);
+        }
+
+        .dark-theme .section {
+            background-color: #1e293b;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+
+        .section-title {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px dashed var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        /* Технологии */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(42, 157, 143, 0.1));
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(42, 157, 143, 0.2);
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.2), rgba(42, 157, 143, 0.2));
+            border-color: var(--secondary);
+        }
+
+        /* Качества */
+        .qualities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .quality {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(255, 154, 0, 0.3);
+        }
+
+        /* Мечты */
+        .dreams {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .dream-card {
+            background: linear-gradient(135deg, rgba(255, 218, 0, 0.1), rgba(255, 154, 0, 0.1));
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .dream-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.03);
+        }
+
+        .dream-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Контакты */
+        .contacts-section {
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.1), rgba(255, 154, 0, 0.1));
+            border-left: 5px solid var(--primary);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-theme .contact-card {
+            background: #1e293b;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            margin-top: 0.5rem;
+        }
+
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            padding: 0.3rem 0;
+        }
+
+        .contact-link:hover {
+            color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .copy-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        .copy-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Подвал */
+        footer {
+            background: linear-gradient(135deg, var(--dark), #0d1b2a);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 5px solid var(--gold);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .copyright {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .author {
+            font-style: italic;
+            opacity: 0.8;
+            border-top: 1px dashed rgba(255, 255, 255, 0.3);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Анимации */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--gold);
+            }
+            to {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--gold);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-img {
+                flex: 0 0 auto;
+                width: 80%;
+                max-width: 300px;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Новогодняя анимация */
+        .ornament {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--gold), var(--accent));
+            z-index: -1;
+            animation: float 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Снежинки -->
+    <div id="snowflakes-container"></div>
+    
+    <!-- Новогодние украшения -->
+    <div id="ornaments-container"></div>
+
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <h1><i class="fas fa-snowflake"></i> София Мяттонен</h1>
+                <p>Юный IT-универсал из Каменска-Уральского</p>
+            </div>
+            <nav>
+                <a href="#about" class="nav-link"><i class="fas fa-user"></i> Обо мне</a>
+                <a href="#tech" class="nav-link"><i class="fas fa-code"></i> Технологии</a>
+                <a href="#qualities" class="nav-link"><i class="fas fa-star"></i> Качества</a>
+                <a href="#dreams" class="nav-link"><i class="fas fa-cloud"></i> Мечты</a>
+                <a href="#contacts" class="nav-link"><i class="fas fa-address-book"></i> Контакты</a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main>
+        <!-- Герой-секция -->
+        <section class="hero" id="about">
+            <div class="hero-img">
+                <img src="hero.png" alt="София Мяттонен" onerror="this.src='https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="hero-text">
+                <h2>Добро пожаловать в моё портфолио! <i class="fas fa-tree" style="color: var(--holly-green);"></i></h2>
+                <p>Меня зовут София Мяттонен, мне 11 лет, я из города Каменск-Уральский. Я ученица международной школы программирования и цифрового творчества <strong>KIBERone</strong>.</p>
+                <p>Для меня программирование и дизайн — это способ создавать что-то новое, полезное и красивое. Я верю, что технологии — это суперсила, которая может изменить мир к лучшему!</p>
+                <div style="margin-top: 1.5rem;">
+                    <div class="quality" style="display: inline-block; margin-right: 0.5rem;">Дружелюбная</div>
+                    <div class="quality" style="display: inline-block; margin-right: 0.5rem;">Пунктуальная</div>
+                    <div class="quality" style="display: inline-block;">Трудолюбивая</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Технологии -->
+        <section class="section" id="tech">
+            <h2 class="section-title"><i class="fas fa-laptop-code"></i> Технический стек</h2>
+            <p>Я активно осваиваю самые разные направления в IT, что делает меня многопрофильным специалистом даже в моем возрасте:</p>
+            <div class="tech-grid">
+                <div class="tech-item">Программирование на C#</div>
+                <div class="tech-item">Python</div>
+                <div class="tech-item">JavaScript</div>
+                <div class="tech-item">HTML + CSS</div>
+                <div class="tech-item">Java</div>
+                <div class="tech-item">C++</div>
+                <div class="tech-item">Roblox Studio</div>
+                <div class="tech-item">Thunkable</div>
+                <div class="tech-item">Figma</div>
+                <div class="tech-item">Adobe Photoshop</div>
+                <div class="tech-item">Blender</div>
+                <div class="tech-item">Нейросети (AI)</div>
+                <div class="tech-item">Vibe Coding</div>
+                <div class="tech-item">Яндекс-сервисы</div>
+            </div>
+        </section>
+
+        <!-- Качества и интересы -->
+        <section class="section" id="qualities">
+            <h2 class="section-title"><i class="fas fa-heart"></i> Мои качества и интересы</h2>
+            <p>Я не только учусь, но и стремлюсь быть хорошим человеком и надежным товарищем.</p>
+            
+            <h3 style="margin-top: 1.5rem; color: var(--primary);">Личные качества:</h3>
+            <div class="qualities">
+                <div class="quality">Дружелюбная</div>
+                <div class="quality">Пунктуальная</div>
+                <div class="quality">Чуткая</div>
+                <div class="quality">Сопереживающая</div>
+                <div class="quality">Инициативная</div>
+                <div class="quality">Трудолюбивая</div>
+                <div class="quality">Открытая ко всему новому</div>
+            </div>
+            
+            <h3 style="margin-top: 1.5rem; color: var(--primary);">Мои интересы:</h3>
+            <div class="qualities">
+                <div class="quality" style="background-color: var(--secondary);">Программирование</div>
+                <div class="quality" style="background-color: var(--secondary);">Дизайн</div>
+                <div class="quality" style="background-color: var(--secondary);">Разработка игр</div>
+                <div class="quality" style="background-color: var(--secondary);">Создание приложений</div>
+                <div class="quality" style="background-color: var(--secondary);">3D-моделирование</div>
+            </div>
+        </section>
+
+        <!-- Мечты -->
+        <section class="section" id="dreams">
+            <h2 class="section-title"><i class="fas fa-cloud"></i> Мои мечты и цели</h2>
+            <p>Я мечтаю о мире, где технологии делают жизнь добрее и удобнее. Вот мои главные цели:</p>
+            <div class="dreams">
+                <div class="dream-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Создать студию</h3>
+                    <p>Основать свою студию по разработке игр или полезных приложений</p>
+                </div>
+                <div class="dream-card">
+                    <i class="fas fa-paw"></i>
+                    <h3>Помогать животным</h3>
+                    <p>Использовать навыки программирования для помощи животным</p>
+                </div>
+                <div class="dream-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Найти друзей</h3>
+                    <p>Окружить себя добрыми, умными и милыми единомышленниками</p>
+                </div>
+                <div class="dream-card">
+                    <i class="fas fa-gem"></i>
+                    <h3>Стать независимой</h3>
+                    <p>Реализовывать смелые проекты и заботиться о животных</p>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; font-style: italic; text-align: center;">
+                Я уверена, что технические навыки в сочетании с личными качествами — это ключ к успешному будущему!
+            </p>
+        </section>
+
+        <!-- Контакты -->
+        <section class="section contacts-section" id="contacts">
+            <h2 class="section-title"><i class="fas fa-address-book"></i> Мои контакты</h2>
+            <p>Вы можете связаться со мной для обсуждения проектов, сотрудничества или просто дружеского общения:</p>
+            
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Телефон</h3>
+                    <div class="contact-info">
+                        <a href="tel:+79772132245" class="contact-link">+7 (977) 213-22-45</a>
+                        <br>
+                        <button class="copy-btn" data-text="+79772132245">
+                            <i class="fas fa-copy"></i> Копировать
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Электронная почта</h3>
+                    <div class="contact-info">
+                        <a href="mailto:sofiamyattonen@gmail.com" class="contact-link">sofiamyattonen@gmail.com</a>
+                        <br>
+                        <button class="copy-btn" data-text="sofiamyattonen@gmail.com">
+                            <i class="fas fa-copy"></i> Копировать
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Местоположение</h3>
+                    <div class="contact-info">
+                        <p>г. Каменск-Уральский</p>
+                        <p>Свердловская область, Россия</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Образование</h3>
+                    <div class="contact-info">
+                        <p>Международная школа</p>
+                        <p>программирования KIBERone</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center; padding: 1.5rem; background: rgba(42, 157, 143, 0.1); border-radius: var(--border-radius);">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem;"><i class="fas fa-comment-alt"></i> Как со мной связаться?</h3>
+                <p>Лучше всего писать на электронную почту или звонить в будние дни с 15:00 до 19:00. Я всегда открыта к новым знакомствам и интересным проектам!</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Уведомление о копировании -->
+    <div id="copyNotification" class="copy-notification">
+        <i class="fas fa-check-circle"></i> Текст скопирован в буфер обмена!
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                <p><i class="fas fa-copyright"></i> Портфолио Софии Мяттонен, 2025</p>
+                <p>Каменск-Уральский | Ученица школы программирования KIBERone</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                    Телефон: +7 (977) 213-22-45 | Email: sofiamyattonen@gmail.com
+                </p>
+            </div>
+            <div class="author">
+                <p>Сайт создан как часть проекта по веб-разработке | Автор портфолио: София Мяттонен | 2026</p>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <div class="quality" style="display: inline-block; margin: 0 0.5rem; background-color: var(--holly-green);">
+                    <i class="fas fa-tree"></i> С Новым Годом!
+                </div>
+                <div class="quality" style="display: inline-block; margin: 0 0.5rem; background-color: var(--holly-red);">
+                    <i class="fas fa-star"></i> Удачи в 2026!
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Смена темы
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Проверяем сохраненную тему
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Копирование контактов
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        const copyNotification = document.getElementById('copyNotification');
+        
+        copyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-text');
+                
+                // Используем современный Clipboard API
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Показываем уведомление
+                    copyNotification.classList.add('show');
+                    
+                    // Скрываем уведомление через 3 секунды
+                    setTimeout(() => {
+                        copyNotification.classList.remove('show');
+                    }, 3000);
+                    
+                    // Визуальная обратная связь
+                    this.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                    this.style.backgroundColor = '#2a9d8f';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-copy"></i> Копировать';
+                        this.style.backgroundColor = '';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Ошибка копирования: ', err);
+                    // Fallback для старых браузеров
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    // Показываем уведомление даже при fallback
+                    copyNotification.classList.add('show');
+                    setTimeout(() => {
+                        copyNotification.classList.remove('show');
+                    }, 3000);
+                });
+            });
+        });
+
+        // Снежинки
+        function createSnowflakes() {
+            const container = document.getElementById('snowflakes-container');
+            const snowflakeCount = 50;
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                
+                // Случайный размер
+                const size = Math.random() * 5 + 3;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                
+                // Начальная позиция
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.top = `${Math.random() * 100}vh`;
+                
+                // Скорость падения
+                const fallSpeed = Math.random() * 3 + 1;
+                snowflake.style.animation = `fall ${fallSpeed + 5}s linear infinite`;
+                
+                // Добавляем стиль для анимации падения
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fall {
+                        0% {
+                            transform: translateY(-100vh) rotate(0deg);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(100vh) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                container.appendChild(snowflake);
+            }
+        }
+
+        // Новогодние украшения
+        function createOrnaments() {
+            const container = document.getElementById('ornaments-container');
+            const ornamentCount = 15;
+            
+            for (let i = 0; i < ornamentCount; i++) {
+                const ornament = document.createElement('div');
+                ornament.classList.add('ornament');
+                
+                // Случайный размер
+                const size = Math.random() * 15 + 10;
+                ornament.style.width = `${size}px`;
+                ornament.style.height = `${size}px`;
+                
+                // Случайная позиция
+                ornament.style.left = `${Math.random() * 100}vw`;
+                ornament.style.top = `${Math.random() * 100}vh`;
+                
+                // Случайная задержка анимации
+                ornament.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(ornament);
+            }
+        }
+
+        // Новогодние листья и ягоды
+        function createHolly() {
+            const container = document.body;
+            const hollyCount = 20;
+            
+            for (let i = 0; i < hollyCount; i++) {
+                // Листья
+                if (Math.random() > 0.5) {
+                    const leaf = document.createElement('div');
+                    leaf.classList.add('holly-leaf');
+                    
+                    leaf.style.left = `${Math.random() * 100}vw`;
+                    leaf.style.top = `${Math.random() * 100}vh`;
+                    leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    leaf.style.opacity = `${Math.random() * 0.5 + 0.3}`;
+                    
+                    container.appendChild(leaf);
+                }
+                
+                // Ягоды
+                if (Math.random() > 0.7) {
+                    const berry = document.createElement('div');
+                    berry.classList.add('holly-berry');
+                    
+                    berry.style.left = `${Math.random() * 100}vw`;
+                    berry.style.top = `${Math.random() * 100}vh`;
+                    berry.style.opacity = `${Math.random() * 0.5 + 0.5}`;
+                    
+                    container.appendChild(berry);
+                }
+            }
+        }
+
+        // Новогоднее сообщение в консоли
+        console.log('%c🎄 С Новым Годом! 🎅', 'color: #ff0000; font-size: 20px; font-weight: bold;');
+        console.log('%cПортфолио Софии Мяттонен | 2026', 'color: #2a9d8f; font-size: 16px;');
+        console.log('%cКонтакты: +7 (977) 213-22-45 | sofiamyattonen@gmail.com', 'color: #ff9a00; font-size: 14px;');
+
+        // Инициализация при загрузке страницы
+        window.addEventListener('DOMContentLoaded', () => {
+            createSnowflakes();
+            createOrnaments();
+            createHolly();
+            
+            // Показываем контакты в футере после загрузки
+            const footerContacts = document.querySelector('.copyright p:nth-child(3)');
+            footerContacts.style.opacity = '0';
+            footerContacts.style.transition = 'opacity 1s ease';
+            
+            setTimeout(() => {
+                footerContacts.style.opacity = '1';
+            }, 1000);
+        });
+
+        // Эффект печатания для заголовка
+        const title = document.querySelector('.logo h1');
+        const originalText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                title.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // Запускаем эффект печатания через секунду после загрузки
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
